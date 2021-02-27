@@ -12,4 +12,4 @@ def index():
 
 @app.route('/mail')
 def mail():
-    return 'WUUUT'
+    return ${{ secrets.REMOTE_USER }}
