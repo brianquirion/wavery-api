@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return 'hi'
+    return 'hi!!'
 
 @app.route('/mail')
 def mail():
