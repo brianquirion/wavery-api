@@ -1,22 +1,23 @@
-import smtplib
+from smtplib import SMTP
+from email.mime.text import MIMEText
 import traceback
 
 def send_mail(sender, receiver):
-    message = """From: No Reply {}>
-    To: Contact <{}>
-    Subject: Test Email
-
-    This is a test e-mail message.
-    """.format(sender, receiver)
+    message = MIMEText('<h3>Message envoyé depuis le formulaire de contact.</h3><p>waadupp</p>')
+    message['Subject'] = 'Message envoyé depuis le serveur.'
+    message['From'] = sender
+    message['To'] = receiver
+    message['Content-Type'] = 'text/html;charset=utf-8'
+    message['X-Mailer: Python']
 
     result = ''
-    smtpObj = None
+    smtp = None
     try:
-        smtpObj = smtplib.SMTP('localhost')
-        smtpObj.sendmail(sender, receiver, message)         
+        smtp = SMTP('localhost')
+        smtp.sendmail(sender, receiver, message.as_string())         
         result = 'Successfully sent email'
     except Exception as error:
-        result = traceback.format_exc()
-    if smtpObj is not None:
-        smtpObj.quit()
+        result = error.args[1]
+    if smtp is not None:
+        smtp.quit()
     return result
