@@ -11,7 +11,9 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - name: Setup config.json
-      run: sed -i 's/$SECRET_VALUE/${{ secrets.SECRET_VALUE }}/' config.json
+      run: |
+        sed -i 's/$MAIL_FROM/${{ secrets.MAIL_FROM }}/' config.json
+        sed -i 's/$MAIL_TO/${{ secrets.MAIL_TO }}/' config.json
     - name: Deploy to Server
       uses: appleboy/scp-action@master
       with:

@@ -1,0 +1,4 @@
+{
+    "mail_from": "$MAIL_FROM",
+    "mail_to": "$MAIL_TO"
+}
