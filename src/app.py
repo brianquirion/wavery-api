@@ -16,5 +16,4 @@ def index():
 def mail():
     with open('src/config.json') as f:
         config = json.load(f)
-    send_mail(config['mail_from'], config['mail_to'])
-    return 'sent successfully'
+    return send_mail(config['mail_from'], config['mail_to'])

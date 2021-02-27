@@ -1,4 +1,5 @@
 import smtplib
+import traceback
 
 def send_mail(sender, receiver):
     message = """From: No Reply {}>
@@ -9,10 +10,13 @@ def send_mail(sender, receiver):
     """.format(sender, receiver)
 
     result = ''
-    smtpObj = smtplib.SMTP('localhost')
+    smtpObj = None
     try:
+        smtpObj = smtplib.SMTP('localhost')
         smtpObj.sendmail(sender, receiver, message)         
         result = 'Successfully sent email'
-    except SMTPException:
-        result = 'Error: unable to send email'
-    smtpObj.quit()
+    except Exception as error:
+        result = traceback.format_exc()
+    if smtpObj is not None:
+        smtpObj.quit()
+    return result
