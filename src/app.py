@@ -14,11 +14,10 @@ def index():
 
 @app.route('/mail', methods=['POST'])
 def mail():
-    if 'full_name' not in request.args 
-        or 'sender' not in request.args 
-        or 'subject' not in request.args
-        or 'message' not in request.args:
-        return jsonify(message='Missing arguments in payload', status=400, category='error')
+    if 'full_name' not in request.json or 'sender' not in request.json \
+        or 'subject' not in request.json \
+        or 'message' not in request.json:
+        return jsonify(message='Missing arguments in payload'), 400
 
     with open('src/config.json') as f:
         config = json.load(f)
@@ -31,7 +30,8 @@ def mail():
     email_message += '<strong>Message : {}</strong><br/><br/>'.format(body['message'])
 
     try:
-        send_mail(config['mail_from'], config['mail_to'], body['sender'], subject, body)
+        send_mail(config['mail_from'], config['mail_to'], body['sender'], body['subject'], body['message'])
     except Exception as e:
-        return jsonify(message=e.args[1], status=400, category='error')
-    return jsonify(status=200, category='success')
+        print(e.args)
+        return jsonify(message=e.args[1]), 400
+    return '', 200
