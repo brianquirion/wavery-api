@@ -1,3 +1,4 @@
+import json
 import os
 import sys
 from flask import Flask
@@ -12,4 +13,6 @@ def index():
 
 @app.route('/mail')
 def mail():
-    return ${{ secrets.REMOTE_USER }}
+    with open('config.json') as f:
+        config = json.load(f)
+    return config['test_secret']
