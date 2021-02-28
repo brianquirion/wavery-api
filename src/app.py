@@ -32,6 +32,5 @@ def mail():
     try:
         send_mail(config['mail_from'], config['mail_to'], body['sender'], body['subject'], body_message)
     except Exception as e:
-        print(e.args)
         return jsonify(message=e.args[1]), 400
     return '', 200
