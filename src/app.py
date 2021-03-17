@@ -4,6 +4,7 @@ import sys
 from flask import Flask, request, jsonify
 from src.service.mail import send_mail
 
+
 sys.path.insert(0, os.path.dirname(__file__))
 
 app = Flask(__name__)
@@ -11,6 +12,7 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     return 'hi!!'
+
 
 @app.route('/mail', methods=['POST'])
 def mail():
@@ -34,3 +36,35 @@ def mail():
     except Exception as e:
         return jsonify(message=e.args[1]), 400
     return '', 200
+
+
+@app.route('/video/main', methods=['GET'])
+def video_main():
+    video = {
+            'id': 'jm8HQMRNc1I',
+            'title': 'Old Times\' Sake',
+            'description': 'Studio live session'
+        }
+    return video
+
+
+@app.route('/video/list', methods=['GET'])
+def video_list():
+    videos = [
+        {
+            'id': 'aNAGNT-7v6Y',
+            'title': 'Sometimes',
+            'description': 'Official video'
+        },
+        {
+            'id': 'JkPf8NmjbmA',
+            'title': 'Plain Sight',
+            'description': 'Official video'
+        },
+        {
+            'id': '01H5vmAbit8',
+            'title': 'Old Times\' Sake',
+            'description': 'Official video'
+        }
+    ]
+    return jsonify(videos=videos), 200
