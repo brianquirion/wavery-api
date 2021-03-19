@@ -41,9 +41,9 @@ def mail():
 @app.route('/video/main', methods=['GET'])
 def video_main():
     video = {
-            'id': 'jm8HQMRNc1I',
-            'title': 'Old Times\' Sake',
-            'description': 'Studio live session'
+            'id': 'YtxB2_46QWk',
+            'title': 'Mégaphone',
+            'description': 'Official video'
         }
     return video
 
@@ -62,9 +62,9 @@ def video_list():
             'description': 'Official video'
         },
         {
-            'id': '01H5vmAbit8',
+            'id': 'jm8HQMRNc1I',
             'title': 'Old Times\' Sake',
-            'description': 'Official video'
+            'description': 'Live studio session'
         }
     ]
     return jsonify(videos=videos), 200
